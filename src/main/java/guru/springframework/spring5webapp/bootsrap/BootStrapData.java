@@ -1,4 +1,4 @@
-package guru.springframework.spring5webapp.boostrap;
+package guru.springframework.spring5webapp.bootsrap;
 
 import guru.springframework.spring5webapp.domain.Author;
 import guru.springframework.spring5webapp.domain.Book;
@@ -8,8 +8,6 @@ import guru.springframework.spring5webapp.repository.BookRepository;
 import guru.springframework.spring5webapp.repository.PublisherRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-
-import java.util.Optional;
 
 /*@ Component is the most generic Spring annotation. A Java class decorated with @Component is found during
         classpath scanning and registered in the context as a Spring bean. @Service, @Repository, and @Controller
@@ -31,16 +29,19 @@ public class BootStrapData implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
+        System.out.println("Started in Bootstrap");
+
         Publisher publisher = new Publisher();
         publisher.setName("SFG Publishing");
         publisher.setCity("St Petersburg");
         publisher.setState("FL");
 
         publisherRepository.save(publisher);
-        System.out.println("Number of publishers: " + publisherRepository.count());
+
+        System.out.println("Publisher Count: " + publisherRepository.count());
 
         Author eric = new Author("Eric", "Evans");
-        Book ddd = new Book("Domain Driven Desing", "123123");
+        Book ddd = new Book("Domain Driven Design", "123123");
         eric.getBooks().add(ddd);
         ddd.getAuthors().add(eric);
 
@@ -52,7 +53,7 @@ public class BootStrapData implements CommandLineRunner {
         publisherRepository.save(publisher);
 
         Author rod = new Author("Rod", "Johnson");
-        Book noEJB = new Book("J2EE Development without EJB", "343432423423");
+        Book noEJB = new Book("J2EE Development without EJB", "3939459459");
         rod.getBooks().add(noEJB);
         noEJB.getAuthors().add(rod);
 
@@ -63,9 +64,7 @@ public class BootStrapData implements CommandLineRunner {
         bookRepository.save(noEJB);
         publisherRepository.save(publisher);
 
-        System.out.println("Started in Bootstrap");
         System.out.println("Number of Books: " + bookRepository.count());
-
-        //System.out.println("Publisher Number of Books: " + ((Publisher)publisherRepository.findById(publisher.getId()).get()).getBooks().size());
+        System.out.println("Publisher Number of Books: " + publisher.getBooks().size());
     }
 }
